@@ -2,14 +2,6 @@
 <html> 
   <head>
     <title>Hexomino: HTML</title> 
-    <style>
-     body {
-			position: absolute;
-  			left: 300px;
-  			top: 200px;
-			background-color: #ffffff;
-		}
-    </style>
   </head>
   <body>
 	<!--This draws the canvas on the webpage -->
@@ -33,8 +25,8 @@ var clears = [
 ];
 
 textFont(createFont("monospace"));
-var mouseXReal = mouseX+300;
-var mouseYReal = mouseY+200;
+var mouseXReal = mouseXReal+0;
+var mouseYReal = mouseYReal+0;
 var selectVoid = false;
 var iCK = function(col,m){
     var num = null;
@@ -196,8 +188,8 @@ var voids = [false,true,false];
 var specKeys = {};
 
 draw = function() {
-    mouseXReal = mouseX + 300;
-    mouseYReal = mouseY + 200;
+    mouseXReal = mouseX + 0;
+    mouseYReal = mouseY + 0;
     kpN = false;
     kp0 = false;
     mouseReleased = function(){mr = true; mp2 = false;};
