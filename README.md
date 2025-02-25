@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <meta charset="utf-8">
@@ -9,13 +8,13 @@
     </head>
     <body>
         <h2>bergergames</h2>
-        <a href = "https://bergerman3.github.io/cavesearch">Cave Search</a>
+        <a href = "https://bergerman3.github.io/cavesearch.html">Cave Search</a>
         <br><br>
-        <a href = "https://bergerman3.github.io/jumper">Jumper</a>
+        <a href = "https://bergerman3.github.io/jumper.html">Jumper</a>
         <br><br>
-        <a href = "https://bergerman3.github.io/blobgame">Blob Game</a>
+        <a href = "https://bergerman3.github.io/blobgame.html">Blob Game</a>
         <br><br>
-        <a href = "https://bergerman3.github.io/hexomino">Hexomino</a>
+        <a href = "https://bergerman3.github.io/hexomino.html">Hexomino</a>
 
     </body>
 </html>
