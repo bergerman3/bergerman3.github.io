@@ -12,7 +12,7 @@
         <br><br>
         <a href = "https://bergerman3.github.io/jumper.html">Jumper</a>
         <br><br>
-        <a href = "https://bergerman3.github.io/blobgame.html">Blob Game</a>
+        <a href = "https://bergerman3.github.io/blobgame">Blob Game</a>
         <br><br>
         <a href = "https://bergerman3.github.io/hexomino.html">Hexomino</a>
 
