@@ -15,6 +15,8 @@
         <a href = "https://bergerman3.github.io/blobgame">Blob Game</a>
         <br><br>
         <a href = "https://bergerman3.github.io/hexomino.html">Hexomino</a>
+        <br><br>
+        <a href = "https://bergerman3.github.io/wafflegame.html">Waffle Game v0.1 (unfinished)</a>
 
     </body>
 </html>
