@@ -1,0 +1,520 @@
+<html> 
+  <head>
+    <title>wafflegame</title> 
+  </head>
+  <body>
+	<!--This draws the canvas on the webpage -->
+    <canvas id="mycanvas"></canvas> 
+  </body>
+ 
+  <!-- Include the processing.js library -->
+  <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+  <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+  <script>
+  var programCode = function(processingInstance) {
+    with (processingInstance) {
+      size(800, 600); 
+      frameRate(30);
+        
+      // Paste code from Khan Academy here:
+// var why = "why not";
+strokeCap(SQUARE);
+textFont(createFont("monospace"));
+var waffledraw = function(x,y,size,col1,col2,thickness){
+        fill(col1);
+        stroke(col2);
+        strokeWeight(thickness);
+        ellipse(x,y,size,size);
+        line(x-size*(7/30),y-size*(13/30),x-size*(7/30),y+size*(13/30));
+        line(x,y-(size/2),x,y+(size/2));
+        line(x+size*(7/30),y-size*(13/30),x+size*(7/30),y+size*(13/30));
+        
+        line(x-size*(13/30),y-size*(7/30),x+size*(13/30),y-size*(7/30));
+        line(x-size/2,y,x+size/2,y);
+        line(x-size*(13/30),y+size*(7/30),x+size*(13/30),y+size*(7/30));
+
+};
+
+var boxdraw1 = function(x,y,size,col1,col2,thickness,wafflecount){
+        fill(col1);
+        stroke(col2);
+        strokeWeight(thickness);
+        rect(x,y,size/2,size);
+        quad(x,y,x+size/2,y-size/3,x+size,y-size/3,x+size*5/10,y);
+        quad(x+size*5/10,y,x+size,y-size/3,x+size,y + size/2,x+size*1/2,y+size);
+        fill(255, 0, 0);
+        textSize(size/5);
+        text(wafflecount,x+size/8,y+size/4);
+        fill(0,0,255);
+        textSize(size/10);
+        text("Waffles", x+size/16,y+size/2.5);
+        fill(0, 94, 94);
+        textSize(size/15);
+        text("Waffle Co.", x+size/16,y+size/1.3);
+        waffledraw(x+size/3.75,y+size/2,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/3,y+size/1.9,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/5.5,y+size/1.8,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+};
+
+var boxdraw2 = function(x,y,size,col1,col2,thickness,wafflecount){
+        fill(col1);
+        stroke(col2);
+        strokeWeight(thickness);
+        rect(x,y,size*0.8,size*0.8);
+        quad(x,y,x+size*0.55,y-size/4,x+size*1.2,y-size/4,x+size*0.8,y);
+        quad(x+size*0.8,y+size*0.8,x+size*0.8,y,x+size*1.2,y-size/4,x+size*1.2,y+size*0.4);
+        fill(255, 0, 0);
+        textSize(size/5);
+        text(wafflecount,x+size/3,y+size/4);
+        fill(0,0,255);
+        textSize(size/10);
+        text("Waffles", x+size/7,y+size/2.5);
+        fill(0, 94, 94);
+        textSize(size/15);
+        text("Waffle Co.", x+size/5,y+size/1.3);
+        waffledraw(x+size/3.75,y+size/2,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/3,y+size/1.9,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/5.5,y+size/1.8,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        
+        waffledraw(x+size/2,y+size/2,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/3,y+size/1.9,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/5.5,y+size/1.8,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+};
+
+var boxdraw3 = function(x,y,size,col1,col2,thickness,wafflecount){
+        fill(col1);
+        stroke(col2);
+        strokeWeight(thickness);
+        rect(x,y,size*0.8,size*1.2);
+        quad(x,y,x+size*0.55,y-size/4,x+size*1.2,y-size/4,x+size*0.8,y);
+        quad(x+size*0.8,y+size*1.2,x+size*0.8,y,x+size*1.2,y-size/4,x+size*1.2,y+size*0.8);
+        fill(255, 0, 0);
+        textSize(size/5);
+        text(wafflecount,x+size/3.75,y+size/4);
+        fill(0,0,255);
+        textSize(size/10);
+        text("Waffles", x+size/7,y+size/2.5);
+        fill(0, 94, 94);
+        textSize(size/15);
+        text("Waffle Co.", x+size/5,y+size/1.3);
+        waffledraw(x+size/3.75,y+size/2,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/3,y+size/1.9,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/5.5,y+size/1.8,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        
+        waffledraw(x+size/2,y+size/2,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/3,y+size/1.9,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+        waffledraw(x+size/5.5,y+size/1.8,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
+};
+
+
+var freezerdraw = function(x,y,size,thickness,type){
+    switch(type){
+        case 0:
+            break;
+        case 1:
+            fill(143, 143, 143);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x,y,size*0.75,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*0.45,y+size*0.1,size*0.2,size*0.8,3);
+            break;
+        case 2:
+            fill(214, 214, 214);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x,y,size*0.75,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*0.45,y+size*0.1,size*0.2,size*0.8,3);
+            break;
+        case 3:
+            fill(255, 255, 255);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x,y,size*0.75,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*0.45,y+size*0.1,size*0.2,size*0.8,3);
+            break;
+        case 4:
+            fill(140, 140, 140);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x,y,size*0.75,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*0.45,y+size*0.1,size*0.2,size*0.3,3);
+            rect(x+size*0.45,y+size*0.6,size*0.2,size*0.3,3);
+            break;
+        case 5:
+            fill(184, 184, 184);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x,y,size*0.75,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*0.45,y+size*0.1,size*0.2,size*0.3,3);
+            rect(x+size*0.45,y+size*0.6,size*0.2,size*0.3,3);
+            break;
+        case 6:
+            fill(217, 217, 217);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x,y,size*0.75,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*0.45,y+size*0.1,size*0.2,size*0.3,3);
+            rect(x+size*0.45,y+size*0.6,size*0.2,size*0.3,3);
+            break;
+        default:
+            stroke(125, 50, 125);
+            fill(26, 26, 26);
+            strokeWeight(thickness);
+
+            ellipse(x+size*0.375,y+size*0.5,size,size);
+    }
+
+};
+
+// scene system!!!!111!!!!!!!11!!!!!!1!!!!1!!!1
+var wafflesPerClick = 1;
+var waffleWorth = 1;
+var freezers = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var selectedFreezer = null;
+var waffleCap = 24;
+var waffles = 0;
+var scene = 0;
+var freezerCost = 24;
+var kpN = false;
+var kp0 = false;
+var kp = false;
+var mp = false;
+var mr = false;
+var mp2 = false;
+var money = 0;
+var keys = {};
+var specKeys = {};
+var hit = false;
+var lowestFreeze = null;
+var upgrades = [0,0,0,0,0,0,0,0,0,0];
+//upgrade adds: (wafflesSold * (upgrades[0]+1))*pow(upgrades[1],2)*(log(waffles)/log(20)*upgrades[2])+upgrades[3];
+draw = function() {
+    
+        kpN = false;
+    kp0 = false;
+    mouseReleased = function(){mr = true; mp2 = false;};
+    mousePressed = function(){mp = true;mp2 = true;};
+    keyPressed = function(){keys[key.code] = true; kp = true;kp0 = true;kpN = true;  if(keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 || keyCode === SHIFT || keyCode === CONTROL){specKeys[keyCode]=true;kpN = true;}
+};
+    keyReleased = function(){keys[key.code] = false;
+    if(keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 || keyCode === SHIFT || keyCode === CONTROL){specKeys[keyCode]=false;}
+    };
+
+    
+    switch(scene){
+        case 0:
+            //main menu{
+            background(144);
+            waffledraw(100,100,100,color(255, 221, 0),color(222, 192, 0),5);
+            fill(200);
+            stroke(110, 110, 110);
+            rect(50,200,150,50);
+            if(mp&&mouseX>=50&&mouseX<=200&&mouseY>=200&&mouseY<=250){scene = 1;}
+            rect(50,260,150,50);
+            rect(50,320,150,50);
+            
+            fill(0);
+            textSize(30);
+            text("The Waffle Game",160,75,200,150);
+            text('Play',90,235);
+            text('How',90,295);
+            text('Settings',55,355);
+            boxdraw1(250,250,100,color(250, 217, 0),color(0, 0, 0),2,12);
+            break;
+            //}
+        case 1:
+            //game{
+            background(128);
+            fill(224, 224, 224);
+            stroke(87, 87, 87);
+            strokeCap(ROUND);
+            strokeWeight(8);
+            waffleCap = 0;
+            lowestFreeze = null;
+            for(var a = 0; a<=3; a++){
+                for(var b = 0; b<=3; b++){
+                    if(selectedFreezer === b*4+a){fill(0, 187, 255);}
+                    if(freezers[b*4+a]===0 && b*4+a <= lowestFreeze &&lowestFreeze !==null|| freezers[b*4+a]===0 && lowestFreeze === null){lowestFreeze = b*4+a;}
+                    if(mouseX>=a*75+50&&mouseX<=a*75+125&&mouseY>=b*75+50&&mouseY<=b*75+125){fill(189, 237, 255);}
+
+                    rect(a*75+50,b*75+50,75,75);
+                    if(mp&&mouseX>=a*75+50&&mouseX<=a*75+125&&mouseY>=b*75+50&&mouseY<=b*75+125&&selectedFreezer===null&& !hit){selectedFreezer=b*4+a;hit = true;}
+                    if(mp&&mouseX>=a*75+50&&mouseX<=a*75+125&&mouseY>=b*75+50&&mouseY<=b*75+125&&selectedFreezer!==null){
+                        if(freezers[b*4+a]===freezers[selectedFreezer]&&b*4+a!==selectedFreezer&&freezers[b*4+a]!==0){freezers[b*4+a]+=1;
+                        freezers[selectedFreezer]=0;}
+                    }
+                    freezerdraw(a*75+72.5,b*75+67.5,40,3,freezers[b*4+a]);
+                    fill(54, 135, 61);
+                    if(freezers[b*4+a]!==0){
+                    text("T"+freezers[b*4+a],a*75+55,b*75+76);
+                    waffleCap+= 12*pow(2,freezers[b*4+a]);
+                    }
+                    fill(224, 224, 224);
+                    stroke(87, 87, 87);
+                    strokeWeight(8);
+                }
+            }
+            if(mr){hit=false;}
+            if(mp&&selectedFreezer!==null&& !hit){selectedFreezer = null;}
+            fill(17, 255, 0);
+            stroke(0, 158, 34);
+            rect(358,220,50,175);
+            if(mouseX>=350&&mouseY>=220&&mouseY<=400&&mp){
+                scene = 2;
+            }
+            fill(0, 217, 255);
+            stroke(0, 12, 237);
+            rect(50,358,300,55);
+            if(mp&&mouseX>=50&&mouseY>=350&&mouseX<=350&&money>=freezerCost&&lowestFreeze!==null){
+                freezers[lowestFreeze] = upgrades[1]+1;
+                money -= freezerCost;
+                freezerCost *= 1.2;
+                freezerCost = round(freezerCost);
+            }
+            fill(217, 0, 0);
+            stroke(77, 0, 0);
+            rect(-16,358,58,55);
+            if(mp&&mouseX<=50&&mouseY>=350){money += waffles*waffleWorth*pow(2,upgrades[0]); waffles = 0;}
+            fill(238, 255, 0);
+            stroke(238, 128, 0);
+            rect(-5,50,47,300);
+            if(mp&&mouseX<=56&&mouseY>=50&&mouseY<=350){
+                if(waffles < waffleCap){
+                    waffles+= wafflesPerClick;
+                }
+            }
+            if(waffles > waffleCap){waffles=waffleCap;}
+            pushMatrix();
+            rotate(270);
+            fill(0, 48, 3);
+            textSize(18);
+            text("Waffle Upgrades",-390,387);
+            popMatrix();
+            pushMatrix();
+            rotate(90);
+            fill(120, 78, 0);
+            textSize(30);
+            text("Add Waffle",110,-10);
+            popMatrix();
+            fill(0, 2, 99);
+            textSize(20);
+            text("Add Freezer - $"+freezerCost,100,390);
+            fill(0);
+            text("Waffles: "+waffles + "/" + waffleCap,10,35);
+            text("$" + money,300,35);
+            textSize(15);
+            fill(89, 0, 0);
+            text("Sell",2,385);
+
+            break;
+            //}
+        case 2:
+            background(107, 107, 107);
+            fill(255, 0, 0);
+            stroke(150,0,0);
+            strokeWeight(8);
+            rect(204,-4,200,100);
+            fill(4, 255, 0);
+            textSize(1);
+            var str = "$"+money;
+            textSize(80/(log(textWidth(str)/log(10))+2));
+            text("$"+money,5,30,180,50);
+            fill(0);
+            textSize(60);
+            text("Exit",235,65);
+            if(mp&&mouseX>=200&&mouseY<=100){scene = 1;}
+            
+            fill(194, 194, 194);
+            stroke(54, 54, 54);
+            rect(-10,100,110,150);
+            rect(100,100,100,150);
+            rect(200,100,100,150);
+            rect(300,100,110,150);
+            
+            rect(-10,325,210,75);
+            rect(-10,250,210,75);
+            if(mp&&mouseX<=200&&mouseY>=250&&mouseY<=325){scene = 2.1;}
+            
+            waffledraw(35,362.5,60,color(0, 0, 217),color(0, 9, 110),4);
+
+            waffledraw(35,287.5,60,color(230, 196, 0),color(112, 93, 0),4);
+            if(mp&&mouseX<=200&&mouseY>=325&&mouseY<=400){scene= 2.2;}
+            
+            waffledraw(47,140,60,color(224, 194, 0),color(140, 119, 3),4);
+            
+            boxdraw3(320,125,45,color(255, 141, 20),color(0, 0, 0),2,72);
+            
+            boxdraw2(114,127,50,color(250, 217, 0),color(0, 0, 0),2,4);
+
+            boxdraw1(220,127,50,color(250, 179, 0),color(0, 0, 0),2,12);
+            
+            fill(0);
+            textSize(20);
+            text("Waffle Upgrades",70,270,100,50);
+            //text("Waffle Types"
+            
+            textSize(10);
+            text("1 WPC (waffle per click)",6,175,90,50);
+            text("4 WPC",136,195,90,50);
+            text("12 WPC",230,198,90,50);
+            text("72 WPC",325,199,90,50);
+            fill(181, 0, 0);
+            text("Requires 100 waffle cap",106,173,90,50);
+            text("Requires 500 waffle cap",206,178,90,50);
+            text("Requires 1000 waffle cap",306,180,90,50);
+            strokeWeight(8);
+            
+            textSize(15);
+            fill(0,255,0);
+            stroke(13, 130, 3);
+            if(wafflesPerClick===1){
+                fill(0, 251, 255);
+                stroke(4, 89, 128);
+            }
+            if(mouseX>=8&&mouseX<=88&&mouseY>=210&&mouseY<=240&&mp){wafflesPerClick = 1;}
+            rect(8,210,80,30);
+            if(wafflesPerClick===1){
+                fill(0);
+                text("Selected",12,230);
+            }else{
+                fill(0);
+                text("Select",21,230);
+            }
+            
+            
+            if(waffleCap<100){
+                fill(255, 0, 0);
+                stroke(128, 4, 23);
+            }else if(wafflesPerClick===4){
+                fill(0, 251, 255);
+                stroke(4, 89, 128);
+            }else{
+                fill(0,255,0);
+                stroke(13, 130, 3);
+                if(mouseX>=110&&mouseX<=190&&mouseY>=210&&mouseY<=240&&mp){wafflesPerClick = 4;}
+            }
+            rect(110,210,80,30);
+            
+            if(wafflesPerClick===4){
+                fill(0);
+                text("Selected",114,230);
+            }else if(waffleCap>=100){
+                fill(0);
+                text("Select",123,230);
+            }else{
+                fill(0);
+                text("NO",143,230);
+            }
+
+            
+            if(waffleCap<500){
+                fill(255, 0, 0);
+                stroke(128, 4, 23);
+            }else if(wafflesPerClick===12){
+                fill(0, 251, 255);
+                stroke(4, 89, 128);
+            }else{
+                fill(0,255,0);
+                stroke(13, 130, 3);
+                if(mouseX>=210&&mouseX<=290&&mouseY>=210&&mouseY<=240&&mp){wafflesPerClick = 12;}
+            }
+            rect(210,210,80,30);
+            if(wafflesPerClick===12){
+                fill(0);
+                text("Selected",214,230);
+            }else if(waffleCap>=500){
+                fill(0);
+                text("Select",223,230);
+            }else{
+                fill(0);
+                text("NO",243,230);
+            }
+
+            
+            
+            if(waffleCap<1000){
+                fill(255, 0, 0);
+                stroke(128, 4, 23);
+            }else if(wafflesPerClick===72){
+                fill(0, 251, 255);
+                stroke(4, 89, 128);
+            }else{
+                fill(0,255,0);
+                stroke(13, 130, 3);
+                if(mouseX>=310&&mouseX<=390&&mouseY>=210&&mouseY<=240&&mp){wafflesPerClick = 72;}
+            }
+            
+            rect(310,210,80,30);
+            
+            if(wafflesPerClick===72){
+                fill(0);
+                text("Selected",314,230);
+            }else if(waffleCap>=1000){
+                fill(0);
+                text("Select",323,230);
+            }else{
+                fill(0);
+                text("NO",343,230);
+            }
+            break;
+        case 2.1:
+            background(107, 107, 107);
+            fill(255, 0, 0);
+            stroke(150,0,0);
+            strokeWeight(8);
+            rect(204,-4,200,100);
+            fill(0);
+            textSize(60);
+            text("Back",235,65);
+            if(mp&&mouseX>=200&&mouseY<=100){scene = 2;}
+            fill(0, 255, 4);
+            textSize(1);
+            var str = "$"+money;
+            textSize(80/(log(textWidth(str)/log(10))+2));
+            text("$"+money,5,30,180,50);
+            fill(194, 194, 194);
+            stroke(54, 54, 54);
+            rect(-10,100,210,150);
+            rect(200,250,210,160);
+            rect(200,100,210,150);
+            rect(-10,250,210,160);
+            
+            waffledraw(45,150,80,color(255, 213, 0),color(186, 124, 0),5);
+            fill(0);
+            textSize(20);
+            text("2x Money",90,130);
+            textSize(12);
+            text("Currently: "+pow(2,upgrades[0]) + "x",89,150,100,40);
+            
+            
+            fill(0,100,0);
+            textSize(20);
+            text("$"+pow(3,upgrades[0])*50,20,200,160,60);
+            
+            if(mp&&mouseX<=200&&mouseY>=100&&mouseY<=250){
+                if(money >= pow(3,upgrades[0])*50){
+                    money -= pow(3,upgrades[0])*50;
+                    upgrades[0]+=1;
+                }
+            }
+    }
+    
+    mr = false;
+    mp = false;
+
+};
+
+    }};
+
+  // Get the canvas that ProcessingJS will use
+  var canvas = document.getElementById("mycanvas"); 
+  // Pass the function to ProcessingJS constructor
+  var processingInstance = new Processing(canvas, programCode); 
+  </script>
+</html>
