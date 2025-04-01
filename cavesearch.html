@@ -333,6 +333,7 @@ stone.prototype.display = function(){
         stroke(100, 100, 0);
         fill(100,100,0);
     }
+    var touching = false;
     for(var d = 0; d < revsOnDisp.length; d++){
     if(revsOnDisp[d].x + 20 >= this.x+(1-p)*25 && revsOnDisp[d].x + 20 <= this.x+(1-p)*25 + 10*p && revsOnDisp[d].y + 16 >= this.y+(1-p)*25 && revsOnDisp[d].y - 16 <=this.y+(1-p)*25+50*p){revsOnDisp[d].x = this.x+(1-p)*25 - 20;}else{    if(revsOnDisp[d].y + 20 >= this.y+(1-p)*25 && revsOnDisp[d].y + 20 <= this.y+(1-p)*25+10*p&&revsOnDisp[d].x + 16 >= this.x+(1-p)*25 && revsOnDisp[d].x - 16 <= this.x+(1-p)*25+50*p){revsOnDisp[d].gravity = false;revsOnDisp[d].jump = 0;revsOnDisp[d].y = this.y+(1-p)*25-20;}
     if(revsOnDisp[d].y - 20 >= this.y+(1-p)*25 + 40*p && revsOnDisp[d].y - 20 <= this.y+(1-p)*25+50*p&&revsOnDisp[d].x + 16 >= this.x+(1-p)*25 && revsOnDisp[d].x - 16 <= this.x+(1-p)*25 + 50*p){revsOnDisp[d].y = this.y+(1-p)*25+50*p+20;revsOnDisp[d].jump = -1;}}
@@ -343,11 +344,13 @@ stone.prototype.display = function(){
     }
     
     
-    if(plr.x + 20 >= this.x+(1-p)*25 && plr.x + 20 <= this.x+(1-p)*25 + 10*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25 - 20;this.hp -= this.hp/100 + 0.5; this.bdam = true;if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25+10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25+50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25-20;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;}}
-    if(plr.y - 20 >= this.y+(1-p)*25 + 40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;}}}
+    if(plr.x + 20 >= this.x+(1-p)*25 && plr.x + 20 <= this.x+(1-p)*25 + 10*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25 - 20;this.hp -= this.hp/100 + 0.5; this.bdam = true;if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25+10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25+50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25-20;touching = true;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}
+    if(plr.y - 20 >= this.y+(1-p)*25 + 40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;touching = true;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}}
 
-    if(plr.x - 20 >= this.x+(1-p)*25+40*p && plr.x - 20 <= this.x+(1-p)*25+50*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25+50*p+20;this.hp -= this.hp/100 + 0.5; this.bdam = true;}else{    if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25 + 10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25 - 20;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;}}
-    if(plr.y - 20 >= this.y+(1-p)*25+40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;}}
+    if(plr.x - 20 >= this.x+(1-p)*25+40*p && plr.x - 20 <= this.x+(1-p)*25+50*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25+50*p+20;this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}else{    if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25 + 10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25 - 20;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}
+    if(plr.y - 20 >= this.y+(1-p)*25+40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}
+
+    if(this.mhp === 1 && this.hp <= 125&&touching){plr.hp -= 0.1;backRed = constrain(backRed+10,0,120);}																													   
 }
     
               if(this.hp <= 0&&greedy===false){
