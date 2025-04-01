@@ -269,7 +269,7 @@ var stone = function(x,y,id){
         this.hp = 15 + FY/3;
         this.mhp = 15 + FY/3;
     }
-    if(random(0,1000)<= FY*FY&&diff>1){this.hp = 3+FY; this.mhp =3+FY1; }
+    if(random(0,1000)<= FY*FY&&diff>1){this.hp = 3+FY; this.mhp =3+FY; }
 };
 stone.prototype.display = function(){
     var p = constrain(this.hp/this.mhp,0.25,1);
