@@ -297,7 +297,7 @@ stone.prototype.display = function(){
         stroke(7, 189, 44);
         fill(13, 255, 0);
         this.i =4;
-    }else if(this.id === -100){
+    }else if(this.mhp === 1){
         stroke(122, 121, 122);
         fill(140, 138, 138);
     }
@@ -321,7 +321,7 @@ stone.prototype.display = function(){
         stroke(255, 205, 118);
         fill(183, 123, 0);
         this.i =4;
-    }else if(this.bdam && this.hp > 200){
+    }else if(this.bdam && this.mhp ===1){
         fill(100,0,0);
         stroke(120,0,0);
     }
