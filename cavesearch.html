@@ -376,7 +376,7 @@ stone.prototype.display = function(){
 
             if(mr||keys[101] && FTNH <= 0 && equipped === 0||equipped=== 4 && keys[101]&&ihp > 0||this.ldam||this.mdam){
                 if(equipped === 4){hotbar[eqIn][1] --; ihp --;if(ihp <= 0){yellow = 180; equipped = null;hotbar[eqIn] = [null,null];}}
-                if(this.ldam === false){this.hp -= 1; if(this.id === -100){plr.hp -= 0.5;backRed += 120; backRed = constrain(backRed,0,255);} }else{this.hp-=this.mhp/25-0.1; if(this.id === -100){plr.hp -= 0.1;}}
+                if(this.ldam === false){this.hp -= 1; if(this.id === -100){plr.hp -= 2.5;backRed += 120; backRed = constrain(backRed,0,255);} }else{this.hp-=this.mhp/25-0.1; if(this.id === -100){plr.hp -= 0.1;}}
         
             if(this.hp <= 1&&greedy===false){
                 var ides = this.i + 1;
@@ -2147,6 +2147,10 @@ for(var a1 = 0; a1 < ids.length;a1++){
   var processingInstance = new Processing(canvas, programCode); 
   </script>
 </html>
+
+
+
+
 
 
 
