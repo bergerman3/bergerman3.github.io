@@ -253,9 +253,8 @@ var stone = function(x,y,id){
     this.y = y;
     this.id = id;
     if(this.id <= rarities[FY * 5]){
-        this.hp = 250;
-        this.mhp = 1;
-	this.id = -100;
+        this.hp = 3+FY;
+        this.mhp = 3+FY;
     }else if(this.id <= rarities[FY * 5 + 1]){
         this.hp = 5+FY;
         this.mhp = 5+FY;
@@ -269,7 +268,7 @@ var stone = function(x,y,id){
         this.hp = 15 + FY/3;
         this.mhp = 15 + FY/3;
     }
-    if(random(0,1000)<= FY*FY&&diff>1){this.hp = 3+FY; this.mhp =3+FY;this.jabasd = true; }
+    if(random(0,1000)<= FY*FY&&diff>1){this.hp = 250; this.mhp = 1; this.id = -100;}
 };
 stone.prototype.display = function(){
     var p = constrain(this.hp/this.mhp,0.25,1);
@@ -297,13 +296,9 @@ stone.prototype.display = function(){
         stroke(7, 189, 44);
         fill(13, 255, 0);
         this.i =4;
-    }else if(this.mhp === 1){
-        stroke(0, 0, 0);
+    }else if(this.hp > 200){
         fill(0);
-    }
-    if(this.jabasd){
-        stroke(0, 0, 0);
-        fill(0);
+        stroke(0);
     }
     if(this.ldam){this.bdam=true;}
     if(this.id <= rarities[FY * 5]&&this.bdam){
@@ -325,15 +320,11 @@ stone.prototype.display = function(){
         stroke(255, 205, 118);
         fill(183, 123, 0);
         this.i =4;
-    }else if(this.bdam && this.mhp ===1){
+    }else if(this.bdam && this.hp > 200){
         fill(100,0,0);
         stroke(120,0,0);
     }
-    if(this.jabasd&&this.bdam){
-        stroke(100, 100, 0);
-        fill(100,100,0);
-    }
-    var touching = false;
+    
     for(var d = 0; d < revsOnDisp.length; d++){
     if(revsOnDisp[d].x + 20 >= this.x+(1-p)*25 && revsOnDisp[d].x + 20 <= this.x+(1-p)*25 + 10*p && revsOnDisp[d].y + 16 >= this.y+(1-p)*25 && revsOnDisp[d].y - 16 <=this.y+(1-p)*25+50*p){revsOnDisp[d].x = this.x+(1-p)*25 - 20;}else{    if(revsOnDisp[d].y + 20 >= this.y+(1-p)*25 && revsOnDisp[d].y + 20 <= this.y+(1-p)*25+10*p&&revsOnDisp[d].x + 16 >= this.x+(1-p)*25 && revsOnDisp[d].x - 16 <= this.x+(1-p)*25+50*p){revsOnDisp[d].gravity = false;revsOnDisp[d].jump = 0;revsOnDisp[d].y = this.y+(1-p)*25-20;}
     if(revsOnDisp[d].y - 20 >= this.y+(1-p)*25 + 40*p && revsOnDisp[d].y - 20 <= this.y+(1-p)*25+50*p&&revsOnDisp[d].x + 16 >= this.x+(1-p)*25 && revsOnDisp[d].x - 16 <= this.x+(1-p)*25 + 50*p){revsOnDisp[d].y = this.y+(1-p)*25+50*p+20;revsOnDisp[d].jump = -1;}}
@@ -344,44 +335,20 @@ stone.prototype.display = function(){
     }
     
     
-    if(plr.x + 20 >= this.x+(1-p)*25 && plr.x + 20 <= this.x+(1-p)*25 + 10*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25 - 20;this.hp -= this.hp/100 + 0.5; this.bdam = true;if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25+10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25+50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25-20;touching = true;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}
-    if(plr.y - 20 >= this.y+(1-p)*25 + 40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;touching = true;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}}
+    if(plr.x + 20 >= this.x+(1-p)*25 && plr.x + 20 <= this.x+(1-p)*25 + 10*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25 - 20;}else{    if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25+10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25+50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25-20;if(plr.corrosive){this.hp = 0;}}
+    if(plr.y - 20 >= this.y+(1-p)*25 + 40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;}}}
 
-    if(plr.x - 20 >= this.x+(1-p)*25+40*p && plr.x - 20 <= this.x+(1-p)*25+50*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25+50*p+20;this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}else{    if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25 + 10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25 - 20;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}
-    if(plr.y - 20 >= this.y+(1-p)*25+40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;}else{this.hp -= this.hp/100 + 0.5; this.bdam = true;touching = true;}}
-
-    if(this.mhp === 1 && this.hp <= 125&&touching){plr.hp -= 0.1;backRed = constrain(backRed+10,0,120);}																													   
+    if(plr.x - 20 >= this.x+(1-p)*25+40*p && plr.x - 20 <= this.x+(1-p)*25+50*p && plr.y + 16 >= this.y+(1-p)*25 && plr.y - 16 <=this.y+(1-p)*25+50*p){plr.x = this.x+(1-p)*25+50*p+20;}else{    if(plr.y + 20 >= this.y+(1-p)*25 && plr.y + 20 <= this.y+(1-p)*25 + 10*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.gravity = false;plr.jump = 0;plr.y = this.y+(1-p)*25 - 20;if(plr.corrosive){this.hp = 0;}}
+    if(plr.y - 20 >= this.y+(1-p)*25+40*p && plr.y - 20 <= this.y+(1-p)*25+50*p&&plr.x + 16 >= this.x+(1-p)*25 && plr.x - 16 <= this.x+(1-p)*25 + 50*p){plr.y = this.y+(1-p)*25+50*p+20;plr.jump = -1;if(plr.corrosive){this.hp = 0;}}
 }
     
-              if(this.hp <= 0&&greedy===false){
-                var ides = this.i + 1;
-                            if(ides === 1){
-                                backpack.s ++;
-                            }else if(ides === 2){
-                               backpack.i ++;
-                               worth += 1;
-                          }else if(ides === 3){
-                               backpack.g ++;
-                               worth += 3;
-                         }else if(ides === 4){
-                               backpack.d ++;
-                               worth += 9;
-                        }else if(ides === 5){
-                               backpack.la ++;
-                               worth += 27;
-                         }else{
-                             plr.hp -= 50;
-                         }
-}else if(greedy&&this.hp<=0){yellow = 120;}
-
+  
 
     if(mouseX > this.x && mouseX < this.x + 50 && mouseY > this.y && mouseY < this.y + 50 && dist(plr.x,plr.y,this.x+25,this.y+25)<= 200||this.ldam){
-
-            if(mr||keys[101] && FTNH <= 0 && equipped === 0||equipped=== 4 && keys[101]&&ihp > 0||this.ldam||this.mdam){
-                if(equipped === 4){hotbar[eqIn][1] --; ihp --;if(ihp <= 0){yellow = 180; equipped = null;hotbar[eqIn] = [null,null];}}
-                if(this.ldam === false){this.hp -= 1; if(this.id === -100){plr.hp -= 2.5;backRed += 120; backRed = constrain(backRed,0,255);} }else{this.hp-=this.mhp/25-0.1; if(this.id === -100){plr.hp -= 0.1;}}
-        
-            if(this.hp <= 1&&greedy===false){
+        if(mr||keys[101] && FTNH <= 0 && equipped === 0||equipped=== 4 && keys[101]&&ihp > 0||this.ldam||this.mdam){
+            if(equipped === 4){hotbar[eqIn][1] --; ihp --;if(ihp <= 0){yellow = 180; equipped = null;hotbar[eqIn] = [null,null];}}
+            if(this.ldam === false){this.hp -= 1; if(this.id === -100){plr.hp -= 0.5;backRed += 120; backRed = constrain(backRed,0,255);} }else{this.hp-=this.mhp/25-0.1; if(this.id === -100){plr.hp -= 0.001;}}
+            if(this.hp <= 0&&greedy===false){
                 var ides = this.i + 1;
                             if(ides === 1){
                                 backpack.s ++;
@@ -407,6 +374,10 @@ stone.prototype.display = function(){
     if(random(0,2500) <= 1 && lingered && diff === 5){this.hp = 0;}
     strokeWeight(3);
     
+    if(this.hp > 200){
+        fill(0,0,0,255);
+        stroke(100,100,100,255);
+    }
     rect(this.x+(1-p)*25,this.y+(1-p)*25,50*p,50*p,2);
     this.ldam = false;this.mdam = false;
 };
@@ -2150,14 +2121,6 @@ for(var a1 = 0; a1 < ids.length;a1++){
   var processingInstance = new Processing(canvas, programCode); 
   </script>
 </html>
-
-
-
-
-
-
-
-
 
 
 
