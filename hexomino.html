@@ -20,9 +20,13 @@ var scene = 0;
 var back = color(46,0,1);
 
 var clears = [
-  0,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,0,0,0,0
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ];
+
+var gridSize = 12;
 
 textFont(createFont("monospace"));
 var mouseXReal = mouseXReal+0;
@@ -51,20 +55,9 @@ var iCK = function(col,m){
     return num;
 };
 
-var grid = [
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0,  
-    0,0,0,0,0,0,0,0,0,0,0,0  
-];
+var grid = [];
+for(var ah = 0; ah < pow(gridSize,2); ah++){grid[ah]=0;}
+for(var ah = 0; ah < gridSize*2; ah++){clears[ah]=0;}
 var datOtherFrame = false;
 var selected = null;
 var mult=1;
@@ -224,6 +217,21 @@ draw = function() {
             }
             
             rect(30,200,270,50);
+            
+            
+            rect(220,320,80,70);
+            rect(225,360,30,25);
+            rect(265,360,30,25);
+            if(mouseXReal>=220&&mouseXReal<=260&&mouseYReal>=360&&mouseY<=390&&mp){
+                gridSize-=1;
+for(var ah = 0; ah < pow(gridSize,2); ah++){grid[ah]=0;}
+for(var ah = 0; ah < gridSize*2; ah++){clears[ah]=0;}
+            }
+            if(mouseXReal>=260&&mouseXReal<=300&&mouseYReal>=360&&mouseY<=390&&mp){
+                gridSize+=1;
+for(var ah = 0; ah < pow(gridSize,2); ah++){grid[ah]=0;}
+for(var ah = 0; ah < gridSize*2; ah++){clears[ah]=0;}
+            }
             
             rect(310,320,80,70);
             if(mouseXReal>=310&&mouseYReal>=320&&mp){
@@ -458,6 +466,8 @@ draw = function() {
             textSize(50);
             
             fill(0,0,0,255);
+            text("-",225,386);
+            text("+",265,390);
             text("Hexomino",13,58);
             fill(0,0,0,200);
             text("Hexomino",11,56);
@@ -487,6 +497,7 @@ draw = function() {
                 textSize(20);
                 text("HARD",325,363);
             }
+            text(gridSize+"x"+gridSize,230,363);
             
             
             //fill(0, 0, 0);
@@ -506,11 +517,12 @@ draw = function() {
         case 1:
             scoreHere=0;
             //game (:O)
+            var si = 240/gridSize;
             background(back);
             fill(183, 0, 255);
             textSize(30);
             pushMatrix();
-            rotate(PI/2);
+            rotate(TAU/4);
             text("(x"+mult+")",250,-350);
             fill(255);
             textSize(50);
@@ -521,21 +533,21 @@ draw = function() {
             strokeWeight(2.5);
             strokeCap(SQUARE);
             stroke(back * color(10,10,10),255);
-            for(var a = 0; a<=12;a++){
-                line(a * 20 + 80, 0, a * 20 + 80, 240);
-                line(80, a* 20, 320, a*20);
+            for(var a = 0; a<=gridSize;a++){
+                line(a * si + 80, 0, a * si + 80, 240);
+                line(80, a* si, 320, a*si);
             }
             
             fill(back * color(2,20,4),150);
             stroke(back * color(2,20,4),255);
             for(var a = 0; a < blocks[npossible[0]].length; a+=2){
-                    rect(blocks[npossible[0]][a]*10 + 10, blocks[npossible[0]][a+1]*10+40, 7.5,7.5);
+                    rect(blocks[npossible[0]][a]*si/2 + 10, blocks[npossible[0]][a+1]*si/2+40, si*3/8,si*3/8);
             }
             for(var a = 0; a < blocks[npossible[1]].length; a+=2){
-                    rect(blocks[npossible[1]][a]*10 + 10, blocks[npossible[1]][a+1]*10+110, 7.5,7.5);
+                    rect(blocks[npossible[1]][a]*si/2 + 10, blocks[npossible[1]][a+1]*si/2+110, si*3/8,si*3/8);
             }
             for(var a = 0; a < blocks[npossible[2]].length; a+=2){
-                    rect(blocks[npossible[2]][a]*10 + 10, blocks[npossible[2]][a+1]*10+180, 7.5,7.5);
+                    rect(blocks[npossible[2]][a]*si/2 + 10, blocks[npossible[2]][a+1]*si/2+180, si*3/8,si*3/8);
             }
             
             
@@ -546,15 +558,15 @@ draw = function() {
             fill(back * color(10,14,26),150);
             stroke(back * color(10,14,26),255);
 
-            for(var a = 0; a<=11;a++){
-                for(var b = 0; b<=11;b++){
-                    if(grid[a*12+b] === 1){
-                        rect(b*20+81.25,a*20+3,15,15);
+            for(var a = 0; a<=gridSize-1;a++){
+                for(var b = 0; b<=gridSize-1;b++){
+                    if(grid[a*gridSize+b] === 1){
+                        rect(b*si+81.25,a*si+3,si*3/4,si*3/4);
                     }
                 }
             }
             
-            for(var a = 0; a<=10;a++){
+            for(var a = 0; a<=gridSize-2;a++){
                 if(clears[a] !== 0){
                     var amnt = 255;
                     if(clears[a]<=5){
@@ -565,14 +577,14 @@ draw = function() {
                     }
                     fill(255,255,255,amnt);
                     noStroke();
-                    rect(a*20+80,0,20,240);
+                    rect(a*si+80,0,si,240);
                     clears[a]+=1.5;
                     if(clears[a]>=25){clears[a]=0;}
                 }
                 
             }
             
-            for(var a = 12; a<=23;a++){
+            for(var a = gridSize; a<=gridSize*2-1;a++){
                 if(clears[a] !== 0){
                     var amnt = 255;
                     if(clears[a]<=5){
@@ -583,7 +595,7 @@ draw = function() {
                     }
                     fill(255,255,255,amnt);
                     noStroke();
-                    rect(80,a*20-240,240,20);
+                    rect(80,a*si-240,240,si);
                     clears[a]+=1.5;
                     if(clears[a]>=25){clears[a]=0;}
                 }
@@ -599,7 +611,7 @@ draw = function() {
             }
             if(possible[0]!==null){
                 for(var a = 0; a < blocks[possible[0]].length; a+=2){
-                    rect(blocks[possible[0]][a]*20 + 20, blocks[possible[0]][a+1]*20+260, 15, 15);
+                    rect(blocks[possible[0]][a]*si + 20, blocks[possible[0]][a+1]*si+260, si*3/4, si*3/4);
                 }
             }
             datFrame=false;
@@ -619,7 +631,7 @@ draw = function() {
             }
             if(possible[1]!==null){
                 for(var a = 0; a < blocks[possible[1]].length; a+=2){
-                    rect(blocks[possible[1]][a]*20 + 140, blocks[possible[1]][a+1]*20+260, 15, 15);
+                    rect(blocks[possible[1]][a]*si + 140, blocks[possible[1]][a+1]*si+260, si*3/4, si*3/4);
                 }
             }
             if(mp&&!datFrame&&selected===null&& mouseXReal>140&&mouseXReal<260&&mouseYReal>=260&&mouseYReal<=380){
@@ -639,7 +651,7 @@ draw = function() {
             }
             if(possible[2]!==null){
                 for(var a = 0; a < blocks[possible[2]].length; a+=2){
-                    rect(blocks[possible[2]][a]*20 + 260, blocks[possible[2]][a+1]*20+260, 15, 15);
+                    rect(blocks[possible[2]][a]*si + 260, blocks[possible[2]][a+1]*si+260, si*3/4, si*3/4);
                 }
             }
             if(mp&&!datFrame&&selected===null&& mouseXReal>260&&mouseXReal<380&&mouseYReal>=260&&mouseYReal<=380){
@@ -655,8 +667,8 @@ draw = function() {
             var yes = true;
             if(selected!==null){
                 for(var a = 0; a < blocks[selected].length; a+=2){
-                    if(round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*20>=0&&round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*20<=220 && round((blocks[selected][a]*20 + 0 + mouseXReal - xOff)/20)*20 >= 80 &&round((blocks[selected][a]*20 + 0 + mouseXReal - xOff)/20)*20 <= 300){
-                        if(grid[round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*12+(round((blocks[selected][a]*20 + mouseXReal - xOff)/20)-4)]===1&&!selectVoid){
+                    if(round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/si)*si>=0&&round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*si<240 && round((blocks[selected][a]*si + 0 + mouseXReal - xOff)/si)*si >= 80 &&round((blocks[selected][a]*si + 0 + mouseXReal - xOff)/si)*si <= 300){
+                        if(grid[round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*gridSize+round((blocks[selected][a]*si + mouseXReal - xOff-79)/si)*si/si]===1&&!selectVoid){
                             yes = false;
                         }
 
@@ -664,7 +676,7 @@ draw = function() {
                 }
                 if(yes&&mp||yes&&mr){
                     for(var a = 0; a < blocks[selected].length; a+=2){
-                        grid[round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*12+(round((blocks[selected][a]*20 + mouseXReal - xOff)/20)-4)]=1;
+                        grid[round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*gridSize+round((blocks[selected][a]*si + mouseXReal - xOff-80)/si)*si/si]=1;
                     }
                     if(!selectVoid){
                         scoreHere += 10*mult;
@@ -693,19 +705,19 @@ draw = function() {
                     }
                     var can1b = false;
                     var can2b = false;
-            for(var a = 0; a<= 11; a++){
+            for(var a = 0; a<= gridSize-1; a++){
                 var can1 = true;
                 var can2 = true;
-                for(var b = 0; b <= 11; b++){
-                    if(grid[a*12+b]===0){can1=false;}
-                    if(grid[b*12+a]===0){can2=false;}
+                for(var b = 0; b <= gridSize-1; b++){
+                    if(grid[a*gridSize+b]===0){can1=false;}
+                    if(grid[b*gridSize+a]===0){can2=false;}
                 }
 
                 if(can1){
                     can1b = true;
-                    clears[12+a] = 1;
-                    for(var c = 0; c <= 11; c++){
-                        grid[a*12+c]=0;
+                    clears[gridSize+a] = 1;
+                    for(var c = 0; c <= gridSize-1; c++){
+                        grid[a*gridSize+c]=0;
                     }
                     scoreHere += 10;
                     scoreHere *= 2*mult;
@@ -716,8 +728,8 @@ draw = function() {
                 if(can2){
                     can2b = true;
                     clears[a]=1;
-                    for(var c = 0; c <= 11; c++){
-                        grid[c*12+a]=0;
+                    for(var c = 0; c <= gridSize-1; c++){
+                        grid[c*gridSize+a]=0;
                     }
                     scoreHere += 10;
                     scoreHere *= 2*mult;
@@ -734,37 +746,38 @@ draw = function() {
                     }
                     if(selectVoid){
                         for(var a = 0; a < blocks[selected].length; a+=2){
-                            grid[round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*12+(round((blocks[selected][a]*20 + mouseXReal - xOff)/20)-4)]=0;
+                        grid[round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*gridSize+round((blocks[selected][a]*si + mouseXReal - xOff-80)/si)*si/si]=0;
                         }
                     }
                     selected = null;
                     selectVoid = false;
                     //scan for solution
                     var canSol = false;
-                    for(var a = 0; a<=11; a++){
+                    for(var a = 0; a<=gridSize-1; a++){
                         if(!canSol){
-                            for(var b = 0; b<=11; b++){
+                            for(var b = 0; b<=gridSize-1; b++){
                                 if(!canSol){
                                     var yes = true;
+                            
                                     for(var c = 0; c < blocks[possible[0]].length; c+=2){
-                                        if(round((blocks[possible[0]][c+1]*20+0 )/20)*20+a*20>=0&&round((blocks[possible[0]][c+1]*20)/20)*20+a*20<=220 && round((blocks[possible[0]][c]*20 + 0 )/20)*20+b*20 >= 80 &&round((blocks[possible[0]][c]*20 + 0 )/20)*20+b*20 <= 300){
-                                            if(grid[round((blocks[possible[0]][c+1]*20+0 )/20+a)*12+(round((blocks[possible[0]][c]*20 )/20+b)-4)]===1&&!voids[0]){
+                                        if(round((blocks[possible[0]][c+1]*si+0 )/si)*si+a*si>=0&&round((blocks[possible[0]][c+1]*si)/si)*si+a*si<240 && round((blocks[possible[0]][c]*si + 0 )/si)*20+b*si >= 80 &&round((blocks[possible[0]][c]*si + 0 )/si)*si+b*si <= 300){
+                                            if(grid[round((blocks[possible[0]][c+1]*si+0 )/si+a)*gridSize+(round((blocks[possible[0]][c]*si )/si+b)-4)]===1&&!voids[0]){
                                                 yes = false;
                                             }
                                         }else{yes=false;}
                                     }
                                     var yes2 = true;
                                     for(var c = 0; c < blocks[possible[1]].length; c+=2){
-                                        if(round((blocks[possible[1]][c+1]*20+0)/20)*20+a*20>=0&&round((blocks[possible[1]][c+1]*20)/20)*20+a*20<=220 && round((blocks[possible[1]][c]*20 + 0 )/20)*20+b*20 >= 80 &&round((blocks[possible[1]][c]*20 + 0 )/20)*20+b*20 <= 300){
-                                            if(grid[round((blocks[possible[1]][c+1]*20+0)/20+a)*12+(round((blocks[possible[1]][c]*20 )/20+b)-4)]===1&&!voids[1]){
+                                        if(round((blocks[possible[1]][c+1]*si+0)/si)*si+a*si>=0&&round((blocks[possible[1]][c+1]*si)/20)*si+a*si<240 && round((blocks[possible[1]][c]*si + 0 )/si)*si+b*si >= 80 &&round((blocks[possible[1]][c]*si + 0 )/si)*si+b*si <= 300){
+                                            if(grid[round((blocks[possible[1]][c+1]*si+0 )/si+a)*gridSize+(round((blocks[possible[1]][c]*si )/si+b)-4)]===1&&!voids[1]){
                                                 yes2 = false;
                                             }
                                         }else{yes2=false;}
                                     }
                                     var yes3 = true;
                                     for(var c = 0; c < blocks[possible[2]].length; c+=2){
-                                        if(round((blocks[possible[2]][c+1]*20+0)/20)*20+a*20>=0&&round((blocks[possible[2]][c+1]*20)/20)*20+a*20<=220 && round((blocks[possible[2]][c]*20 + 0 )/20)*20+b*20 >= 80 &&round((blocks[possible[2]][c]*20 + 0 )/20)*20+b*20 <= 300){
-                                            if(grid[round((blocks[possible[2]][c+1]*20+0)/20+a)*12+(round((blocks[possible[2]][c]*20 )/20+b)-4)]===1&&!voids[2]){
+                                        if(round((blocks[possible[2]][c+1]*si+0)/si)*si+a*si>=0&&round((blocks[possible[2]][c+1]*si)/si)*si+a*si<240 && round((blocks[possible[2]][c]*si + 0 )/si)*si+b*si >= 80 &&round((blocks[possible[2]][c]*si + 0 )/si)*si+b*si <= 300){
+                                            if(grid[round((blocks[possible[2]][c+1]*si+0 )/si+a)*gridSize+(round((blocks[possible[2]][c]*si )/si+b)-4)]===1&&!voids[2]){
                                                 yes3 = false;
                                             }
                                         }else{yes3=false;}    
@@ -800,11 +813,11 @@ draw = function() {
                 }
                 if(selected !== null){
                     for(var a = 0; a < blocks[selected].length; a+=2){
-                        rect(blocks[selected][a]*20 + 0 + mouseXReal - xOff, blocks[selected][a+1]*20+0 + mouseYReal - yOff, 15, 15);
-                        if(round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*20>=0&&round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*20<=220 && round((blocks[selected][a]*20 + 0 + mouseXReal - xOff)/20)*20 >= 80 &&round((blocks[selected][a]*20 + 0 + mouseXReal - xOff)/20)*20 <= 300){
+                        rect(blocks[selected][a]*si + 0 + mouseXReal - xOff, blocks[selected][a+1]*si+0 + mouseYReal - yOff, si*3/4, si*3/4);
+                        if(round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*si>=0&&round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*si<=221 && round((blocks[selected][a]*si + 0 + mouseXReal - xOff)/si)*si >= 79 &&round((blocks[selected][a]*si + 0 + mouseXReal - xOff)/si)*si <= 300+((20-gridSize)*1.2)){
                             noStroke();
-                            if(grid[round((blocks[selected][a+1]*20+0 + mouseYReal - yOff)/20)*12+(round((blocks[selected][a]*20 + mouseXReal - xOff)/20)-4)]===0&&!selectVoid){
-                                rect(round((blocks[selected][a]*20 + mouseXReal - xOff)/20)*20+1,round((blocks[selected][a+1]*20 + mouseYReal - yOff)/20)*20+1,18,18);
+                            if(grid[round((blocks[selected][a+1]*si+0 + mouseYReal - yOff)/si)*gridSize+(round((blocks[selected][a]*si + mouseXReal - xOff)/si)-4)]===0&&!selectVoid){
+                                rect(round((blocks[selected][a]*si + mouseXReal - xOff-80)/si)*si+80,round((blocks[selected][a+1]*si + mouseYReal - yOff-220)/si)*si+221,si*0.9,si*0.9);
                             }
                             stroke(color(iCK(back,3),iCK(back,1),iCK(back,2)) * color(91, 120, 61),255);
                             if(!yes){
@@ -821,6 +834,7 @@ draw = function() {
             score += scoreHere;
             break;
         case 2:
+            var si = 240/gridSize;
             background(back);
             noStroke();
             fill(back * color(10,10,10));
@@ -830,7 +844,6 @@ draw = function() {
             
             
             fill(255);
-	    textSize(40);
             text("Game over",20,50);
             text(score,280,380);
             textSize(30);
@@ -839,18 +852,18 @@ draw = function() {
             strokeWeight(5);
             strokeCap(SQUARE);
             stroke(back*color(10,10,10),255);
-            for(var a = 0; a<=12;a++){
-                line(a * 20 + 0, 130, a * 20 + 0, 370);
-                line(0, a* 20+130, 240, a*20+130);
+            for(var a = 0; a<=gridSize;a++){
+                line(a * si + 0, 130, a * si + 0, 370);
+                line(0, a* si+130, 240, a*si+130);
             }
             
             fill(back * color(10,14,26),150);
             stroke(back * color(10,14,26),255);
 
-            for(var a = 0; a<=11;a++){
-                for(var b = 0; b<=11;b++){
-                    if(grid[a*12+b] === 1){
-                        rect(b*20,a*20+135,15,15);
+            for(var a = 0; a<=gridSize-1;a++){
+                for(var b = 0; b<=gridSize-1;b++){
+                    if(grid[a*gridSize+b] === 1){
+                        rect(b*si,a*si+135,si*3/4,si*3/4);
                     }
                 }
             }
@@ -894,6 +907,10 @@ draw = function() {
             
         case -1:
             
+            var br = iCK(back,1)/255;
+            var bg = iCK(back,2)/255;
+            var bb = iCK(back,3)/255;
+            
             noStroke();
             background(back);
             fill(back * color(10,10,10));
@@ -930,22 +947,63 @@ draw = function() {
             text("G",120,195);
             text("B",120,225);
             rect(140,150,100,20);
+            
+                rect(250,150,17,20);
+                rect(273,150,17,20);
+                
+                if(mouseXReal>=250&&mouseYReal>=150&&mouseXReal<=267&&mouseYReal<=170&&mp){
+                    back = color(br*255+1,bg*255,bb*255);
+                }
+                if(mouseXReal>=273&&mouseYReal>=150&&mouseXReal<=280&&mouseYReal<=170&&mp){
+                    back = color(br*255-1,bg*255,bb*255);
+                }
+                
+            
             rect(140,180,100,20);
+            
+                rect(250,180,17,20);
+                rect(273,180,17,20);
+                
+                if(mouseXReal>=250&&mouseYReal>=180&&mouseXReal<=267&&mouseYReal<=200&&mp){
+                    back = color(br*255,bg*255+1,bb*255);
+                }
+                if(mouseXReal>=273&&mouseYReal>=180&&mouseXReal<=280&&mouseYReal<=200&&mp){
+                    back = color(br*255,bg*255-1,bb*255);
+                }
+            
             rect(140,210,100,20);
+            
+                rect(250,210,17,20);
+                rect(273,210,17,20);
+                
+                if(mouseXReal>=250&&mouseYReal>=210&&mouseXReal<=267&&mouseYReal<=230&&mp){
+                    back = color(br*255,bg*255,bb*255+1);
+                }
+                if(mouseXReal>=273&&mouseYReal>=210&&mouseXReal<=290&&mouseYReal<=230&&mp){//println("AAA");
+                    back = color(br*255,bg*255,bb*255-1);
+                }
+
+            
             fill(255);
             text("MAIN COLOR",37,140,50,100);
             text("R",122,165);
             text("G",122,195);
             text("B",122,225);
             
-            var br = iCK(back,1)/255;
-            var bg = iCK(back,2)/255;
-            var bb = iCK(back,3)/255;
+            text("+",252,165);
+            text("+",252,195);
+            text("+",252,225);
+            
+            text("-",276,165);
+            text("-",276,195);
+            text("-",276,225);
+            
+            
 
             fill(255, 0, 0);
             rect(140,150,100*br,20);
             
-            if(mp2&&mouseXReal>=140&&mouseXReal<=240&&mouseYReal>=150&&mouseYReal<=170){
+            if(mp2&&mouseXReal>140&&mouseXReal<=240&&mouseYReal>=150&&mouseYReal<=170){
                 var di = (mouseXReal-140)/100;
                 back = color(di*255,bg*255,bb*255);
             }
@@ -953,7 +1011,7 @@ draw = function() {
             fill(0, 255, 0);
             rect(140,180,100*bg,20);
             
-            if(mp2&&mouseXReal>=140&&mouseXReal<=240&&mouseYReal>=180&&mouseYReal<=200){
+            if(mp2&&mouseXReal>140&&mouseXReal<=240&&mouseYReal>=180&&mouseYReal<=200){
                 var di = (mouseXReal-140)/100;
                 back = color(br*255,di*255,bb*255);
             }
@@ -961,10 +1019,19 @@ draw = function() {
             fill(0, 0, 255);
             rect(140,210,100*bb,20);
             
-            if(mp2&&mouseXReal>=140&&mouseXReal<=240&&mouseYReal>=210&&mouseYReal<=230){
+            if(mp2&&mouseXReal>140&&mouseXReal<=240&&mouseYReal>=210&&mouseYReal<=230){
                 var di = (mouseXReal-140)/100;
                 back = color(br*255,bg*255,di*255);
             }
+            fill(0);
+            text(iCK(back,1),175,147,100,100);
+            text(iCK(back,2),175,177,100,100);
+            text(iCK(back,3),175,207,100,100);
+            fill(255);
+            text(iCK(back,1),177,147,100,100);
+            text(iCK(back,2),177,177,100,100);
+            text(iCK(back,3),177,207,100,100);
+            
             
     }
     
