@@ -17,6 +17,7 @@
       frameRate(30);
         
       // Paste code from Khan Academy here:
+
 // var why = "why not";
 strokeCap(SQUARE);
 textFont(createFont("monospace"));
@@ -162,6 +163,45 @@ var freezerdraw = function(x,y,size,thickness,type){
             rect(x+size*0.45,y+size*0.1,size*0.2,size*0.3,3);
             rect(x+size*0.45,y+size*0.6,size*0.2,size*0.3,3);
             break;
+        case 7:
+            fill(217, 217, 217);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x-size*0.25,y,size*1.2,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*-0.1,y+size*0.2,size*0.2,size*0.65,3);
+            rect(x+size*+0.3,y+size*0.2,size*0.2,size*0.65,3);
+            rect(x+size*+0.7,y+size*0.2,size*0.2,size*0.65,3);
+            stroke(0);
+            line(x+size*+0.13,y+4,x+size*+0.13,y+size*0.9);
+            line(x+size*+0.53,y+4,x+size*+0.53,y+size*0.9);
+            break;
+        case 8:
+            fill(237, 237, 237);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x-size*0.25,y,size*1.2,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*-0.1,y+size*0.2,size*0.2,size*0.65,3);
+            rect(x+size*+0.3,y+size*0.2,size*0.2,size*0.65,3);
+            rect(x+size*+0.7,y+size*0.2,size*0.2,size*0.65,3);
+            stroke(0);
+            line(x+size*+0.13,y+4,x+size*+0.13,y+size*0.9);
+            line(x+size*+0.53,y+4,x+size*+0.53,y+size*0.9);
+            break;
+        case 9:
+            fill(255, 255, 25);
+            stroke(26, 26, 26);
+            strokeWeight(thickness);
+            rect(x-size*0.25,y,size*1.2,size,thickness*2);
+            fill(237, 237, 237);
+            rect(x+size*-0.1,y+size*0.2,size*0.2,size*0.65,3);
+            rect(x+size*+0.3,y+size*0.2,size*0.2,size*0.65,3);
+            rect(x+size*+0.7,y+size*0.2,size*0.2,size*0.65,3);
+            stroke(0);
+            line(x+size*+0.13,y+4,x+size*+0.13,y+size*0.9);
+            line(x+size*+0.53,y+4,x+size*+0.53,y+size*0.9);
+            break;
         default:
             stroke(125, 50, 125);
             fill(26, 26, 26);
@@ -175,7 +215,7 @@ var freezerdraw = function(x,y,size,thickness,type){
 // scene system!!!!111!!!!!!!11!!!!!!1!!!!1!!!1
 var wafflesPerClick = 1;
 var waffleWorth = 1;
-var freezers = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var freezers = [Infinity^1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var selectedFreezer = null;
 var waffleCap = 24;
 var waffles = 0;
@@ -191,6 +231,7 @@ var money = 0;
 var keys = {};
 var specKeys = {};
 var hit = false;
+var highestTier = null;
 var lowestFreeze = null;
 var upgrades = [0,0,0,0,0,0,0,0,0,0];
 //upgrade adds: (wafflesSold * (upgrades[0]+1))*pow(upgrades[1],2)*(log(waffles)/log(20)*upgrades[2])+upgrades[3];
@@ -252,6 +293,10 @@ draw = function() {
                     freezerdraw(a*75+72.5,b*75+67.5,40,3,freezers[b*4+a]);
                     fill(54, 135, 61);
                     if(freezers[b*4+a]!==0){
+                    if(freezers[b*4+a]>=highestTier||highestTier === null){
+                        highestTier = freezers[b*4+a];
+                    }
+                    if(freezers[b*4+a]<upgrades[1]+1){freezers[b*4+a]=upgrades[1]+1;}
                     text("T"+freezers[b*4+a],a*75+55,b*75+76);
                     waffleCap+= 12*pow(2,freezers[b*4+a]);
                     }
@@ -286,18 +331,19 @@ draw = function() {
             rect(-5,50,47,300);
             if(mp&&mouseX<=56&&mouseY>=50&&mouseY<=350){
                 if(waffles < waffleCap){
-                    waffles+= wafflesPerClick;
+                    waffles+= wafflesPerClick*((upgrades[2]+4)/4);
+                    waffles = round(waffles);
                 }
             }
             if(waffles > waffleCap){waffles=waffleCap;}
             pushMatrix();
-            rotate(3*PI/2);
+            rotate(270);
             fill(0, 48, 3);
             textSize(18);
             text("Waffle Upgrades",-390,387);
             popMatrix();
             pushMatrix();
-            rotate(PI/2);
+            rotate(90);
             fill(120, 78, 0);
             textSize(30);
             text("Add Waffle",110,-10);
@@ -489,18 +535,36 @@ draw = function() {
             fill(0);
             textSize(20);
             text("2x Money",90,130);
+            text("+0.25x \n   WPC",115,280);
+            text("+1 Basic \n Freezer \n    Tier",290,130);
             textSize(12);
             text("Currently: "+pow(2,upgrades[0]) + "x",89,150,100,40);
+            text("Currently: T"+(upgrades[1]+1),289,180,100,40);
             
-            
+            freezerdraw(210,110,80,5,upgrades[1]+1);
+            boxdraw3(10,285,70,color(255, 141, 20),color(0, 0, 0),2,72);
             fill(0,100,0);
             textSize(20);
-            text("$"+pow(3,upgrades[0])*50,20,200,160,60);
+            text("$"+pow(3,upgrades[0])*50,20,200,160,14214160);
+            text("$"+pow(5,upgrades[1]+1)*50,215,200,160,621320);
+            text("$"+pow(4,upgrades[2]+1)*50,20,370,160,2134160);
             
             if(mp&&mouseX<=200&&mouseY>=100&&mouseY<=250){
                 if(money >= pow(3,upgrades[0])*50){
                     money -= pow(3,upgrades[0])*50;
                     upgrades[0]+=1;
+                }
+            }
+            if(mp&&mouseX>=200&&mouseY>=100&&mouseY<=250){
+                if(money >= pow(5,upgrades[1]+1)*50){
+                    money -= pow(5,upgrades[1]+1)*50;
+                    upgrades[1]+=1;
+                }
+            }
+            if(mp&&mouseX<=200&&mouseY>=250){
+                if(money >= pow(4,upgrades[2]+1)*50){
+                    money -= pow(4,upgrades[2]+1)*50;
+                    upgrades[2]+=1;
                 }
             }
     }
@@ -509,6 +573,7 @@ draw = function() {
     mp = false;
 
 };
+
 
     }};
 
