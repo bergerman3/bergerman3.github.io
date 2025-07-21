@@ -331,7 +331,7 @@ draw = function() {
             fill(217, 0, 0);
             stroke(77, 0, 0);
             rect(-16,358,58,55);
-            if(mp&&mouseX<=50&&mouseY>=350){money += (waffles*(upgrades[3]/10))*waffleWorth*pow(2,upgrades[0]); totalmoney += (waffles*(upgrades[3]/10))*waffleWorth*pow(2,upgrades[0]); waffles = 0;}
+            if(mp&&mouseX<=50&&mouseY>=350){money += (waffles*waffleWorth*pow(2,upgrades[0]); totalmoney += (waffles*waffleWorth*pow(2,upgrades[0]); waffles = 0;}
             fill(238, 255, 0);
             stroke(238, 128, 0);
             rect(-5,50,47,300);
