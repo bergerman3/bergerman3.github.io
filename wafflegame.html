@@ -235,9 +235,9 @@ var totalmoney = 0;
 var highestTier = null;
 var lowestFreeze = null;
 var framestill = 300;
-if(localStorage.getItem("money")){
-	money = localStorage.getItem("money");
-	totalmoney = localStorage.getItem("money");
+if(localStorage.getItem("Money")){
+	money = localStorage.getItem("Money");
+	totalmoney = localStorage.getItem("Money");
 }
 var upgrades = [0,0,0,0,0,0,0,0,0,0];
 //upgrade adds: (wafflesSold * (upgrades[0]+1))*pow(upgrades[1],2)*(log(waffles)/log(20)*upgrades[2])+upgrades[3];
@@ -579,7 +579,7 @@ draw = function() {
     mp = false;
 framestill -= 1;
 	if(framestill<=0){
-		localStorage.setItem("money",totalmoney);
+		localStorage.setItem("Money",totalmoney);
 		framestill = 30;
 	}
 };
