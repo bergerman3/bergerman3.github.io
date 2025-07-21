@@ -580,6 +580,7 @@ draw = function() {
 framestill -= 1;
 	if(framestill<=0){
 		localStorage.setItem("Money",totalmoney);
+		console.log(totalmoney);
 		framestill = 30;
 	}
 };
