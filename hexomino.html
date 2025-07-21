@@ -18,6 +18,9 @@
       frameRate(60);
 var scene = 0;
 var back = color(46,0,1);
+if(localStorage.getItem("color") !== null){
+    back = localStorage.getItem("color");
+}
 
 var clears = [
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -953,9 +956,11 @@ for(var ah = 0; ah < gridSize*2; ah++){clears[ah]=0;}
                 
                 if(mouseXReal>=250&&mouseYReal>=150&&mouseXReal<=267&&mouseYReal<=170&&mp){
                     back = color(br*255+1,bg*255,bb*255);
+                    localStorage:setItem("color",back)
                 }
                 if(mouseXReal>=273&&mouseYReal>=150&&mouseXReal<=280&&mouseYReal<=170&&mp){
                     back = color(br*255-1,bg*255,bb*255);
+                    localStorage:setItem("color",back)
                 }
                 
             
@@ -966,9 +971,12 @@ for(var ah = 0; ah < gridSize*2; ah++){clears[ah]=0;}
                 
                 if(mouseXReal>=250&&mouseYReal>=180&&mouseXReal<=267&&mouseYReal<=200&&mp){
                     back = color(br*255,bg*255+1,bb*255);
+                    localStorage:setItem("color",back)
                 }
                 if(mouseXReal>=273&&mouseYReal>=180&&mouseXReal<=280&&mouseYReal<=200&&mp){
                     back = color(br*255,bg*255-1,bb*255);
+                    localStorage:setItem("color",back)
+
                 }
             
             rect(140,210,100,20);
@@ -978,9 +986,11 @@ for(var ah = 0; ah < gridSize*2; ah++){clears[ah]=0;}
                 
                 if(mouseXReal>=250&&mouseYReal>=210&&mouseXReal<=267&&mouseYReal<=230&&mp){
                     back = color(br*255,bg*255,bb*255+1);
+                    localStorage:setItem("color",back)
                 }
                 if(mouseXReal>=273&&mouseYReal>=210&&mouseXReal<=290&&mouseYReal<=230&&mp){//println("AAA");
                     back = color(br*255,bg*255,bb*255-1);
+                    localStorage:setItem("color",back)
                 }
 
             
