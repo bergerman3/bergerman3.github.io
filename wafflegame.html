@@ -19,6 +19,7 @@
       // Paste code from Khan Academy here:
 
 // var why = "why not";
+// var why = "why not";
 strokeCap(SQUARE);
 textFont(createFont("monospace"));
 var waffledraw = function(x,y,size,col1,col2,thickness){
@@ -106,7 +107,6 @@ var boxdraw3 = function(x,y,size,col1,col2,thickness,wafflecount){
         waffledraw(x+size/3,y+size/1.9,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
         waffledraw(x+size/5.5,y+size/1.8,size/8,color(255, 221, 0),color(222, 192, 0),size/75);
 };
-
 
 var freezerdraw = function(x,y,size,thickness,type){
     switch(type){
@@ -231,8 +231,14 @@ var money = 0;
 var keys = {};
 var specKeys = {};
 var hit = false;
+var totalmoney = 0;
 var highestTier = null;
 var lowestFreeze = null;
+var framestill = 300;
+if(localStorage.getItem("money")){
+	money = localStorage.getItem("money");
+	totalmoney = localStorage.getItem("money");
+}
 var upgrades = [0,0,0,0,0,0,0,0,0,0];
 //upgrade adds: (wafflesSold * (upgrades[0]+1))*pow(upgrades[1],2)*(log(waffles)/log(20)*upgrades[2])+upgrades[3];
 draw = function() {
@@ -325,7 +331,7 @@ draw = function() {
             fill(217, 0, 0);
             stroke(77, 0, 0);
             rect(-16,358,58,55);
-            if(mp&&mouseX<=50&&mouseY>=350){money += waffles*waffleWorth*pow(2,upgrades[0]); waffles = 0;}
+            if(mp&&mouseX<=50&&mouseY>=350){money += (waffles*(upgrades[3]/10))*waffleWorth*pow(2,upgrades[0]); totalmoney += (waffles*(upgrades[3]/10))*waffleWorth*pow(2,upgrades[0]); waffles = 0;}
             fill(238, 255, 0);
             stroke(238, 128, 0);
             rect(-5,50,47,300);
@@ -571,7 +577,11 @@ draw = function() {
     
     mr = false;
     mp = false;
-
+framestill -= 1;
+	if(framestill<=0){
+		localStorage.setItem("money",totalmoney);
+		framestill = 30;
+	}
 };
 
 
